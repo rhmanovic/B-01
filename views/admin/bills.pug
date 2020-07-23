@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-8.col-md-offset-2
+        h1.display-4.m-b-2 bills
+
+        if teachers
+          select#sel(onchange='funTeacherName("j","k")')
+            option Select teacher
+              each teacher,index in teachers
+                option(value= teacher._id, onclick=`funTeacherName("${teacher.name}","${teacher._id}")`)= teacher.name
+
+        // register form
+        form.mt-4(method='POST' action='/admin/bills')
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='teacherName') Teacher Name:
+            .col-sm-10
+              input#teacherName.form-control(type='text', name='teacherName' value = teacherData.teacherName readonly)
+              
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='teacherId') Teacher ID:
+            .col-sm-10
+              input#teacherId.form-control(type='text', name='teacherId' value = teacherData.teacherId readonly)
+          
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='teacherId') Date (eg: MM/YYYY):
+            .col-sm-10
+              input#date.form-control(type='text', name='date')
+          
+          button.btn.btn-primary.btn-block.custom-box-shadow(type='submit') Submit
+
+        script(type='text/javascript').
+          function funTeacherName(name,id) {
+            teacherName.value = sel[sel.selectedIndex].innerText
+            teacherId.value = sel[sel.selectedIndex].value
+          }  
+          

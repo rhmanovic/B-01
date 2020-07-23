@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .main.container.clearfix
+    .row.justify-content-center
+      .col-md-8.col-md-offset-2
+        
+        if status.toLowerCase() != 'failed'
+          .card.border-success.text-success.align-items-center
+            .card-body
+              .text-center.my-3
+                i.fas.fa-check-circle.display-1
+                h1 Payment Success
+              // h5.mt-4 Your payment has been accepted for:
+              li.ml-4 Chapter: #{chapterName}, from Course: #{courseName} 
+              li.ml-4.my-2 Price: #{price} KD
+              div.text-center.mt-4.pt-2
+                a(href=`../Course/${courseId}`)
+                  u go back for your course
+              
+        else if status.toLowerCase() == 'failed'
+          .card.border-danger.text-danger.align-items-center
+            .card-body
+              .text-center.my-3
+                i.fas.fa-times-circle.display-1
+                h1 Payment Declined
+              // h5.mt-4 Your payment has been declined for:
+              li.ml-4 Chapter: #{chapterName}, from Course: #{courseName} 
+              li.ml-4.my-2 Price: #{price} KD
+              div.text-center.mt-4.pt-2
+                a(href=`../Course/${courseId}`)
+                  u go back for your course

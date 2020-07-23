@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-8.col-md-offset-2
+        h1.display-4.m-b-2 bill
+        p= `teacher name = ${teacherData.teacherName}`
+        p= `teacher ID = ${teacherData.teacherId}`
+        p= `Bill date = ${teacherData.date}`
+
+        table.table
+          thead
+            tr
+              th(scope="col") #
+              th(scope="col") Course
+              th(scope="col") chapter
+              th(scope="col") price
+          tbody
+            - var totalPrice = 0
+            each charge,index in theCharges
+              - var price = parseInt(charge.price)
+              - totalPrice += price * 0.6
+              tr
+                th(scope='row')= index+1
+                th(scope='row')= charge.courseName
+                th(scope='row')= charge.chapterName
+                th(scope='row')= (price * 0.6).toFixed(2)
+            tr
+                th(scope='row')
+                th(scope='row')
+                th(scope='row')
+                th(scope='row')= `Total: ${totalPrice.toFixed(2)}`

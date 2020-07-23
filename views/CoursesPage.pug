@@ -1,0 +1,42 @@
+extends layout
+
+block content
+
+  //- .jumbotron.jumbotron-fluid.bg-info.text-white.mb-0
+    .container.text-sm-center.pt-lg-5
+      h1.display-5 Learn your lessons online, be in touch with your classes.
+      p.lead However your classes are difficult - we'll be assisting you.
+
+  - var card = 0
+    while card < 4
+      - card++
+      .container.clearfix.pt-4
+        .col
+          .card.cardShadow.mb-3.border-bottom.border-3
+            .row
+              .col.border-right.pr-0.hideMIN
+                .p-2.bd-highlight.border-bottom 
+                  img.card-img-top.px-4(src='https://cdn.shopify.com/s/files/1/0437/2558/6586/products/85475439-6315-44D3-97A0-889EC00ED704_360x.jpg?v=1595300731', alt='...')
+                  h4.span12.text-center Down Lights
+                - var z = 0
+                  while z < 4
+                    - z++
+                    .p-2.bd-highlight.border-bottom= "Sub Category " + z
+                    
+
+
+              .col.col-lg-9.pl-10
+                .row.row-cols-2.row-cols-sm-3
+                  - var n = 0
+                  while n < 6
+                    - n++
+                    .col
+                      .card-body.hoverInShadow
+                        img.card-img-top(src='https://cdn.shopify.com/s/files/1/0437/2558/6586/products/85475439-6315-44D3-97A0-889EC00ED704_360x.jpg?v=1595300731', alt='...')
+                        h6.card-subtitle.mb-2.text-muted Product Title
+                        span.card-text.text-secondary 0.95 K.D
+                        a.stretched-link(href=`/`)
+    
+
+
+

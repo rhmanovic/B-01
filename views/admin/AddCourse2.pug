@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-8.col-md-offset-2
+        h1.display-4.m-b-2 Add Course
+        p Here you should add Course
+
+        // register form
+        form(method='POST' action='/admin/Addcourse2' id="courseForm")
+          div.form-group
+            label(for='course') Course Name:
+            input#name.form-control(type='text', placeholder='ThermoDynamics' name='course')
+            br
+            
+
+            select(name='teacherId' form="courseForm")
+              option Select teacher
+              each teacher,index in teachers
+                option(value= teacher._id, onclick=`teacherName("${teacher.name}")`)= teacher.name
+            input#iteacherId.form-control(type='hidden', placeholder='' name='teacherName')
+
+          button.btn.btn-primary(type='submit') Submit      
+
+          script(type='text/javascript').
+            function teacherName(name) {
+              iteacherId.value = name
+            }  
+       
+
+

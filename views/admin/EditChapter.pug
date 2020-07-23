@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-8.col-md-offset-2
+        - var i = 1;
+        h1= courseName
+        
+        //- each val2,index in data
+        //- a(href='/addChapter2/?'+val._id)
+        form(method='POST' action='/admin/EditChapter')
+          input(type="hidden" name="courseID" value= courseID)
+          input(type="hidden" name="courseName" value= courseName)
+          input(type="hidden" name="teacherId" value= teacherId)
+          input(type="hidden" name="order" value= order)
+          // input(type="hidden" name="chapterName" value= chapterName)
+          // label= chapterName+'  '
+          // button.btn-danger X
+          - id = 'c'+i++
+          div(id = id).form-group
+            label(for='course') Chapter Name:
+            input#name.form-control(type='text', placeholder='Chapter Name : ...' name='chapterName')
+            label(for='course') Description:
+            input#name.form-control(type='text', placeholder='Description : ...' name='description')
+            label#1(for='chapter') Section 1 name:
+            input#1.form-control(type='text', placeholder='Section' name='section')
+          button.btn.btn-primary(type='button', onclick='addSection('+id+')') Add Section
+          //- - i++
+          br
+          br
+          button.btn.btn-primary(type='submit') Create Chapter  
+
+        script.
+          function addSection(x) {
+            i = x.lastChild.id
+            i = parseInt(i);
+            x.innerHTML += `<div class="form-group" id="${i+1}><label for="section" ">Section ${i+1} name:</label><input class="form-control" placeholder="..." name="section"></div>`;
+          }
+
+

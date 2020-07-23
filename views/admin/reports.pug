@@ -1,0 +1,120 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-8.col-md-offset-2
+        h1.display-4.m-b-2 Reports
+
+        // register form
+        form.mt-4(method='POST' action='/admin/reports')
+          
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='teacherId') Date (eg: MM/YYYY):
+            .col-sm-10
+              input#date.form-control(type='text', name='date')
+          
+          button.btn.btn-primary.btn-block.custom-box-shadow(type='submit') Run Report
+          
+        
+    if theCharges
+      table#theTable.table
+        thead
+          tr
+            th(scope="col") #
+            th(scope="col") Course
+            th(scope="col") Charges
+            // th(scope="col") chapter
+            th(scope="col") Price KD
+            th(scope="col") Teacher Share
+            th(scope="col") Website Share
+        tbody
+          - var totalPrice = 0
+          - var Course = 'a'
+          - var price = 0
+          - var Counter = 1
+          each charge,index in theCharges
+            - var price = parseInt(charge.price)
+            - totalPrice += price
+            
+            if Course == charge.courseName
+              - Counter += 1
+              - price += previousPrice
+              script(type='text/javascript').
+                console.log(theTable.rows.length)
+                var x = theTable.rows.length
+                theTable.deleteRow(x-1)
+            else
+              - Counter = 1
+            tr
+              th(scope='row')= index+1
+              th(scope='row')= charge.courseName
+              th(scope='row')= Counter
+              // th(scope='row')= charge.chapterName
+              th(scope='row')= (price).toFixed(2)
+              th(scope='row')= (price * 0.6).toFixed(2)
+              th(scope='row')= (price * 0.4).toFixed(2)
+            - Course = charge.courseName
+            - previousPrice = price
+            // - price = charge.price
+          tr
+              th(scope='row')
+              th(scope='row')
+              th(scope='row')
+              // th(scope='row')
+              th(scope='row')= `Total: ${totalPrice.toFixed(2)}`
+              th(scope='row')= `Total: ${totalPrice.toFixed(2) * 0.6}`
+              th(scope='row')= `Total: ${totalPrice.toFixed(2) * 0.4}`
+
+
+    script(type='text/javascript').
+      function deletTheRow(r) {
+        theTable.deleteRow(r)
+      }
+
+    if theCharges
+      table#theTable.table.mt-4
+        thead
+          tr
+            th(scope="col") #
+            th(scope="col") Course
+            th(scope="col") Charge Sr.#
+            // th(scope="col") chapter
+            th(scope="col") Price KD
+            th(scope="col") Teacher Share
+            th(scope="col") Website Share
+        tbody
+          - var totalPrice = 0
+          - var Course = 'a'
+          - var price = 0
+          - var Counter = 1
+          each charge,index in theCharges
+            - var price = parseInt(charge.price)
+            - totalPrice += price
+            
+            if Course == charge.courseName
+              - Counter += 1
+            else
+              - Counter = 1
+            tr
+              th(scope='row')= index+1
+              th(scope='row')= charge.courseName
+              th(scope='row')= Counter
+              // th(scope='row')= charge.chapterName
+              th(scope='row')= (price).toFixed(2)
+              th(scope='row')= (price * 0.6).toFixed(2)
+              th(scope='row')= (price * 0.4).toFixed(2)
+            - Course = charge.courseName
+            - previousPrice = price
+            // - price = charge.price
+          tr
+              th(scope='row')
+              th(scope='row')
+              th(scope='row')
+              // th(scope='row')
+              th(scope='row')= `Total: ${totalPrice.toFixed(2)}`
+              th(scope='row')= `Total: ${totalPrice.toFixed(2) * 0.6}`
+              th(scope='row')= `Total: ${totalPrice.toFixed(2) * 0.4}`
+
+
+              

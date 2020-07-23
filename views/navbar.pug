@@ -1,0 +1,141 @@
+nav.navbar-expand-lg.navbar-light.bg-light
+  // .container
+
+  dev.d-flex.flex-column.bd-highlight
+    .d-flex.justify-content-between.pt-2.px-2
+      dev
+        a.navbar-toggler.border-0
+          i.fa.fa-user.mt-3(aria-hidden='true')
+
+        a.navbar-toggler.border-0
+          i.fas.fa-shopping-cart.mt-2
+
+      a.navbar-brand.m-0.p-0
+        img.mx-2.hideMAX(src='/images/logo01.png', alt='Mawadi', data-purpose='mawadi-brand-logo', height='45')
+
+      button.navbar-toggler.collapsed.border-0(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        i.fa.fa-bars(aria-hidden='true')
+
+    .px-2.pb-2.bd-highlight.border-bottom.border-3.navbar-toggler.shadowUnder
+      label.sr-only(for='inlineFormInputGroup') Username
+      .input-group
+        input#inlineFormInputGroup.form-control(type='text', placeholder='Username')
+        .input-group-prepend
+          .input-group-text
+            i.fa.fa-search(aria-hidden='true')
+
+  #navbarSupportedContent.navbar-toggler.collapse.pt-1
+    //- .d-flex.flex-column.bd-highlight.mb-3
+    .p-2.bd-highlight.border-bottom Internal Lights
+    .p-2.bd-highlight.border-bottom exterior Lights
+    .p-2.bd-highlight.border-bottom Bulbs
+  
+
+    // a.navbar-brand.m-0.p-0
+      img.udemy-logo.mx-2(src='https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg', alt='Udemy', data-purpose='udemy-brand-logo', height='45')
+    
+  
+
+
+  // Navigation Bar on Desktop sizr  
+  dev
+    .col
+      .navbar-collapse.collapse.justify-content-around.p-2(style='')
+        // .hideMIN
+        
+
+        a.navbar-brand.nav-item.m-0.p-0.col-auto
+          img.udemy-logo.mx-2.hideMIN(src='/images/logo01.png', alt='Mawadi', data-purpose='udemy-brand-logo', height='45')
+
+        //- ul.navbar-nav.mr-auto
+        .col
+          label.sr-only(for='inlineFormInputGroup') Username
+          .input-group
+            input#inlineFormInputGroup.form-control(type='text', placeholder='Username')
+            .input-group-prepend
+              .input-group-text
+                i.fa.fa-search(aria-hidden='true')
+
+
+        .navbar-nav.mx-4.ml-md-0
+          a.nav-item.nav-link.mx-4(href='/')
+            i.fa.fa-shopping-cart.mt-1(aria-hidden='true')
+          
+          .nav-item
+            if currentUser
+              div
+                img.avatar.img-circle.hidden-xs-downborder.border.collapse(src='/images/avatar.png', alt='avatar')
+                a.btn.pull-md-right.btn-secondary(href='/logout') Log out
+            else  
+              a.btn.btn-info.pull-md-right.mr-md-2.collapse(href='/login')
+                i.fa.fa-user.mr-2(aria-hidden='true')
+                span Login
+              //- a.btn.btn-outline-danger.pull-md-right(href='/register') Sign Up
+    .col.menu.navbar-collapse.collapse.border-bottom.border-3.shadowUnder
+      .col.d-flex.bd-highlight.mx-2
+        .p-2.flex-fill.bd-highlight.text-center.tomato.text-white
+          | Categories   
+          i.fa.fa-caret-down.ml-3(aria-hidden='true')
+        .p-2.flex-fill.bd-highlight.text-center
+          | Deal of the Day
+        .p-2.flex-fill.bd-highlight.text-center
+          | Build My PC
+        .p-2.flex-fill.bd-highlight.text-center
+          | Home Entertainment
+        .p-2.flex-fill.bd-highlight.text-center
+          | Summer Offers
+        .p-2.flex-fill.bd-highlight.text-center
+          | Every day Essentials
+        
+          
+
+      //- .col
+      //-   #navbarSupportedContent.navbar-collapse.collapse.justify-content-around(style='')
+      //-     | ppp
+
+
+
+//- nav.navbar.navbar-expand-lg.navbar-light.bg-light
+//-   // .container
+//-   button.navbar-toggler.collapsed.ml-2(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+//-     span.navbar-toggler-icon
+
+//-   a.navbar-brand.m-0.p-0
+//-     img.mx-2.hideMAX(src='/images/logo01.png', alt='Mawadi', data-purpose='mawadi-brand-logo', height='45')
+
+//-   // a.navbar-brand.m-0.p-0
+//-     img.udemy-logo.mx-2(src='https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg', alt='Udemy', data-purpose='udemy-brand-logo', height='45')
+  
+//-   a.navbar-toggler.border-0
+//-     i.fas.fa-shopping-cart
+
+  //- .container
+  //-   #navbarSupportedContent.navbar-collapse.collapse.justify-content-around(style='')
+  //-     // .hideMIN
+      
+
+  //-     a.navbar-brand.nav-item.m-0.p-0.col
+  //-       img.udemy-logo.mx-2.hideMIN(src='/images/logo01.png', alt='Mawadi', data-purpose='udemy-brand-logo', height='45')
+
+  //-     // #navbarSupportedContent.collapse.navbar-collapse.container
+
+  //-     //- ul.navbar-nav.mr-auto
+  //-     // .nav-item
+  //-     .navbar-nav.mx-4.ml-md-0
+  //-       a.nav-item.nav-link(href='/') HOME
+  //-       // if !currentUser
+  //-         a.nav-item.nav-link(href='/register') Sign Up
+  //-       a.nav-item.nav-link(href='/about') About
+  //-       a.nav-item.nav-link(href='/contact') Contact
+  //-       a.nav-item.nav-link(href='/profile') My Profile
+        
+  //-     .nav-item
+  //-       if currentUser
+  //-         div
+  //-           img.avatar.img-circle.hidden-xs-downborder.border(src='/images/avatar.png', alt='avatar')
+  //-           a.btn.pull-md-right.btn-secondary(href='/logout') Log out
+  //-       else  
+  //-         a.btn.btn-info.pull-md-right.mr-md-2(href='/login') Login
+  //-         //- a.btn.btn-outline-danger.pull-md-right(href='/register') Sign Up
+        
+

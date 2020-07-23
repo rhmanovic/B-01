@@ -1,0 +1,12 @@
+// extends layout
+
+block content
+  .container.clearfix
+    form(method='POST' action='/admin/AddLink')
+      input(type="hidden" name="chapterId" value= chapterId)
+      input(type="hidden" name="SectionIndex" value= sectionIndex)
+      div.form-group
+        label(for='course') Add/Edit Link:
+        input#name.form-control(type='text', placeholder='https://www.google.com/' name='link')
+      button.btn.btn-primary(type='submit') Submit
+      span.appearText(type='button' onclick="this.parentElement.style.display = 'none'") cancel

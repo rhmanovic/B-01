@@ -1,0 +1,11 @@
+
+block content
+  .container.clearfix
+    form(method='POST' action='/admin/renameSection')
+      input(type="hidden" name="chapterId" value= chapterId)
+      input(type="hidden" name="SectionIndex" value= sectionIndex)
+      div.form-group
+        label(for='course') Rename Section:
+        input#name.form-control(type='text', placeholder='Section: ...' name='rename')
+      button.btn.btn-primary(type='submit') Submit
+      span.appearText(type='button' onclick="this.parentElement.style.display = 'none'") cancel

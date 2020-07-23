@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .main.container.clearfix
+    .row
+      .col-md-8.col-md-offset-2
+        h1 My Courses
+        a.nav-item.nav-link(href='/admin/AddCourse2') Creat New Course
+        ul
+          each val,index in data
+            a(href='/admin/course2/'+val._id)
+              li= val.name
+            // ul
+              each chapter,index in val.chapters
+                li= chapter
+                  a(href='/admin/EditChapter/'+val._id+'?side='+index)
+                    i.far.fa-edit
+
+

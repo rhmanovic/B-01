@@ -1,0 +1,26 @@
+nav.navbar.navbar-expand-lg.fixed-top.navbar-light.bg-light
+  button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse.container
+
+    .nav-item
+      a.navbar-brand(href='/')
+        i.icn-logo.material-icons bookmark_border
+        | Bookworm
+    .navbar-nav
+      if !currentUser
+        a.nav-item.nav-link(href='/register') Sign Up
+      // a.nav-item.nav-link(href='/admin/profile') My Profile
+      a.nav-item.nav-link(href='/admin/course') My Courses
+      a.nav-item.nav-link(href='/admin/teacher') teachers
+      a.nav-item.nav-link(href='/admin/bills') bills
+      a.nav-item.nav-link(href='/admin/reports') Reports
+      // a.nav-item.nav-link(href='/admin/AddChapter') admin navbar
+    .nav-item
+      if currentUser
+        div
+          img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='avatar')
+          a.btn.btn-light.pull-md-right(href='/admin/logout') Log out
+      else  
+        a.btn.btn-info.pull-md-right(href='/admin/login') Login
+

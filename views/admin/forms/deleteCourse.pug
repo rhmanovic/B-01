@@ -1,0 +1,9 @@
+
+block content
+  .container.clearfix
+    form(method='POST' action='/admin/deleteCourse')
+      input(type="hidden" name="courseId" value= courseId)
+      div.form-group
+        label(for='course') are you sure you want to delete this Course !
+      button.btn.btn-primary(type='submit') Submit
+      span.appearText(type='button' onclick="this.parentElement.style.display = 'none'") cancel

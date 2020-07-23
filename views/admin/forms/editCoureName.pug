@@ -1,0 +1,10 @@
+
+block content
+  .container.clearfix
+    form(method='POST' action='/admin/editCoureName')
+      input(type="hidden" name="courseId" value= courseId)
+      div.form-group
+        label(for='course') Chapter Name:
+        input#name.form-control(type='text', placeholder='Thermodynamics : ...' name='name')
+      button.btn.btn-primary(type='submit') Submit
+      span.appearText(type='button' onclick="this.parentElement.style.display = 'none'") cancel

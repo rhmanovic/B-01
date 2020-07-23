@@ -1,0 +1,181 @@
+extends layout
+
+block content
+  .main.container.clearfix
+    .row
+      .col-md-8.col-md-offset-2
+        - console.log(courseData._id)
+
+        //- course img link
+        - var linkCoursImg = courseData.img
+        span#showHover
+          if linkCoursImg
+            a(href=linkCoursImg)
+              //- course title
+              h1= courseData.name+'  '
+          else
+            h1= courseData.name+'  '
+          span#elementHover
+            i.fas.fa-plus
+            span.appearText(type='button', onclick=`editCoureName("${courseData._id}")`)
+              i.far.fa-edit
+            span.appearText(type='button', onclick=`deleteCourse("${courseData._id}")`)
+              i.far.fa-trash-alt
+            span.appearText(type='button', onclick=`imgCourse("${courseData._id}")`)
+              i.fas.fa-upload
+        div( id=`responseCourse${courseData._id}`)
+        ul
+          - var indexOut = 0
+          //- to render in all capters
+          each chapter,index in ChaptersData
+            - indexOut = chapter.order + 1
+            - console.log(chapter.order)
+            li#showHover= chapter.name+'  '
+              i#elementHover.fas.fa-plus
+              
+              //-  chapter title
+              if ChaptersData[index]
+                span.appearText#elementHover(type='button', onclick=`editChapterName("${ChaptersData[index]._id}")`)
+                  i.far.fa-edit
+                span.appearText#elementHover(type='button', onclick=`deletChapter("${ChaptersData[index]._id}")`)
+                  i.far.fa-trash-alt
+                //- do it later
+                //- span.appearText#elementHover(type='button', onclick=`imgChapter("${ChaptersData[index]._id}")`)
+                  i.fas.fa-upload
+                div( id=`responseCH${ChaptersData[index]._id}`)
+
+
+            if ChaptersData[index]
+              - var x = ChaptersData[index]
+              span#showHover Price: 
+                span= x.price + ' KD '
+                span.appearText#elementHover(type='button', onclick=`editPrice("${ChaptersData[index]._id}")`) 
+                  i.far.fa-edit
+              if x.description
+                p#showHover= x.description
+                  span.appearText#elementHover(type='button', onclick=`editDescription("${ChaptersData[index]._id}")`)
+                    i.far.fa-edit
+              else
+                p No description
+                  span.appearText#button(type='button', onclick=`editDescription("${ChaptersData[index]._id}")`)
+                    i.far.fa-edit
+              div( id=`response${ChaptersData[index]._id}`)
+              ul
+                each section,index2 in ChaptersData[index].sections
+                  - var link = ChaptersData[index].sectionsLinks[index2];
+                  if link
+                    a(href=link)
+                  // if section
+                  li#showHover
+                    if link
+                      a(href=link)
+                        span= section + ' '
+                    else
+                      span= section + ' '
+                    span#elementHover
+                      - var chapterId= ChaptersData[index]._id
+                      - var sectionIndex= index2
+                      span.appearText#button(type='button', onclick=`addChapter(${index2},"${chapterId}",'renameSection')`)
+                        i.far.fa-edit
+                      span.appearText#button(type='button', onclick=`addChapter(${index2},"${chapterId}",'addLink')`)
+                        i.fas.fa-link
+                      span.appearText#button(type='button', onclick=`addChapter(${index2},"${chapterId}",'deletLink')`)
+                        i.fas.fa-unlink
+                      span.appearText#button(type='button', onclick=`addChapter(${index2},"${chapterId}",'deletSection')`)
+                        i.far.fa-trash-alt
+                      span.appearText#button(type='button', onclick=`addChapter(${index2},"${chapterId}",'upLoad')`)
+                        i.fas.fa-upload
+                    div( id=`response${chapterId}${sectionIndex}` )
+                - var chapterId= ChaptersData[index]._id
+                li.text-primary Create New Section 
+                  span(type='button', onclick=`AddSection("${chapterId}")`)
+                    i.far.fa-file 
+                  div( id=`responseSection${chapterId}` )
+            
+          .createChapter Create New Chapter
+            a(href='/admin/EditChapter/'+courseData._id+'?order='+indexOut)
+              i.far.fa-file                     
+                      
+        script(type='text/javascript').
+          function AddSection(chapterId) {
+            console.log("ssss"+ chapterId)
+            $.get( `/admin/AddSection/${chapterId}`, function(data) {
+              console.log(`Adding Section to the chapter ${chapterId}`)
+              var divId = `#responseSection${chapterId}`
+              $(divId).html(data);
+              // $(`#response`).html(data);
+            });
+          };
+
+        script(type='text/javascript').
+          function addChapter(sectionIndex,chapterId,action) {
+            $.get( `/admin/deletSection/${sectionIndex}/${chapterId}/${action}`, function(data) {
+              console.log(`#response/${chapterId}/${sectionIndex}`)
+              var divId = `#response${chapterId}${sectionIndex}`
+              $(divId).html(data);
+              // $(`#response`).html(data);
+            });
+          };
+
+
+
+
+        script(type='text/javascript').
+          function editDescription(chapterId) {
+            $.get( `/admin/editDescription/${chapterId}`, function(data) {
+              var divId = `#response${chapterId}`
+              $(divId).html(data);
+            });
+          };
+          
+        script(type='text/javascript').
+          function editPrice(chapterId) {
+            $.get( `/admin/editPrice/${chapterId}`, function(data) {
+              var divId = `#response${chapterId}`
+              $(divId).html(data);
+            });
+          };
+
+        script(type='text/javascript').
+          function editChapterName(chapterId) {
+            $.get( `/admin/editChapterName/${chapterId}`, function(data) {
+              var divId = `#responseCH${chapterId}`
+              $(divId).html(data);
+            });
+          };
+
+        script(type='text/javascript').
+          function editCoureName(courseId) {
+            $.get( `/admin/editCoureName/${courseId}`, function(data) {
+              var divId = `#responseCourse${courseId}`
+              $(divId).html(data);
+            });
+          };
+
+        script(type='text/javascript').
+          function deletChapter(chapterId) {
+            $.get( `/admin/deletChapter/${chapterId}`, function(data) {
+              var divId = `#responseCH${chapterId}`
+              $(divId).html(data);
+            });
+          };
+
+        script(type='text/javascript').
+          function deleteCourse(courseId) {
+            $.get( `/admin/deleteCourse/${courseId}`, function(data) {
+              var divId = `#responseCourse${courseId}`
+              $(divId).html(data);
+            });
+          };
+
+        script(type='text/javascript').
+          function imgCourse(courseId) {
+            $.get( `/admin/imgCourse/${courseId}`, function(data) {
+              var divId = `#responseCourse${courseId}`
+              $(divId).html(data);
+            });
+          };
+
+
+
+                    

@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  .main.container
+    .row.justify-content-md-center
+      .col-md-6.col-md-offset-3.text-center
+        h1.display-4.m-b-2 Register a Teacher
+        
+        // register form
+        form.mt-4(method='POST' action='/admin/teacher')
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='name') Name:
+            .col-sm-10
+              input#name.form-control(type='text', placeholder='first and last' name='name')
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='email') Email:
+            .col-sm-10
+              input#email.form-control(type='email', placeholder='name@email.com' name='email')
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='pw') Password:
+            .col-sm-10
+              input#pw.form-control(type='password' name='password')
+          div.form-group.row
+            label.col-sm-2.col-form-label.text-left(for='pw2') Confirm Password:
+            .col-sm-10.parent
+              input#pw2.form-control.child(type='password' name='confirmPassword')
+          button.btn.btn-primary.btn-block.custom-box-shadow(type='submit') Sign up
+
+
+    .container.clearfix
+      .row
+        .col-md-8.col-md-offset-2
+          h1 Teachers
+          - console.log(teachers);
+          ol
+            each teacher,index in teachers
+              li= `${teacher.name}, email: ${teacher.email}`
+                a(href='/admin/bills'+'?teacherId='+teacher._id+'&teacherName='+teacher.name)
+                  span  Show Bills

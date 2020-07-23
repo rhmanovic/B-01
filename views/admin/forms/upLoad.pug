@@ -1,0 +1,49 @@
+
+block content
+  .container.clearfix
+    if msg
+      p= msg
+
+    - var action = `/admin/upLoad/${chapterId}/${sectionIndex}`
+
+    if courseId
+      - action = `/admin/imgCourse/${courseId}`
+
+    form.input-group(method='POST' action=action enctype='multipart/form-data')
+      if courseId
+        input(type="hidden" name="courseId" value= courseId)
+      if chapterId
+        input(type="hidden" name="chapterId" value= chapterId)
+      if sectionIndex
+        input(type="hidden" name="SectionIndex" value= sectionIndex)
+      .input-group-prepend
+        button#myFile.input-group-text(type='submit') Upload
+      .custom-file
+        input#inputGroupFile01.custom-file-input(type='file', aria-describedby='myFile' name='myFile')
+        label.custom-file-label(for='inputGroupFile01') Choose file
+    
+    //- script(type='text/javascript').
+      var formData = new FormData();
+      var file = document.getElementById('myFile').files[0];
+      formData.append('myFile', file);
+      var xhr = new XMLHttpRequest();
+
+      // your url upload
+      xhr.open('post', `/admin/upLoad/${chapterId}/${sectionIndex}`, true);
+
+      xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+          var percentage = (e.loaded / e.total) * 100;
+          console.log(percentage + "%");
+        }
+      };
+
+      xhr.onerror = function(e) {
+        console.log('Error');
+        console.log(e);
+      };
+      xhr.onload = function() {
+        console.log(this.statusText);
+      };
+
+      xhr.send(formData);

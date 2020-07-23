@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  .main.container
+    .row
+      .col-md-8.col-md-offset-2
+        h1.display-4.m-b-2 Add Course
+        p Here you should add Course
+
+        // register form
+        form(method='POST' action='/admin/Addcourse')
+          div.form-group
+            label(for='course') Course Name:
+            input#name.form-control(type='text', placeholder='ThermoDynamics' name='course')
+
+          div#chapters
+            div#1.form-group
+              label(for='chapter') Chapter 1 name:
+              input#email.form-control(type='text', placeholder='What is thermoDynamics' name='chapter')
+
+
+          button.btn.btn-primary(type='button', onclick='addChapter()') Add Chapter
+          button.btn.btn-primary.mr-4(type='button', onclick='removeChapter()') Remove Chapter
+          br
+          br
+          button.btn.btn-primary(type='submit') Submit        
+        script.
+          function addChapter() {
+            var Chapters = document.getElementById('chapters');
+            var id = Chapters.lastChild.id;
+            id = parseInt(id);
+            Chapters.innerHTML += `<div class="form-group" id="${id+1}><label for="chapter" ">Chapter ${id+1} name:</label><input class="form-control" placeholder="..." name="chapter"></div>`;
+          }
+
+          function removeChapter() {
+            var Chapters = document.getElementById('chapters').lastChild.remove();
+          }
+
+
+
+
